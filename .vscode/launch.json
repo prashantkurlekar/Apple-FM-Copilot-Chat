@@ -1,0 +1,37 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/out/**/*.js"
+      ],
+      "preLaunchTask": "compile"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:Apple-FM-Copilot-Chat}/swift",
+      "name": "Debug fm-bridge (swift)",
+      "target": "fm-bridge",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug fm-bridge (swift)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:Apple-FM-Copilot-Chat}/swift",
+      "name": "Release fm-bridge (swift)",
+      "target": "fm-bridge",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release fm-bridge (swift)"
+    }
+  ]
+}

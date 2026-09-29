@@ -1,0 +1,104 @@
+{
+  "name": "apple-fm-copilot-provider",
+  "displayName": "Apple Foundation Models for Copilot Chat",
+  "description": "Use Apple's on-device Foundation Model (Apple Intelligence) as a model in VS Code Copilot Chat. Private, offline, free.",
+  "version": "0.2.0",
+  "publisher": "prashantkurlekar",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.104.0"
+  },
+  "categories": [
+    "AI",
+    "Chat"
+  ],
+  "keywords": [
+    "apple",
+    "foundation models",
+    "apple intelligence",
+    "copilot",
+    "on-device",
+    "llm"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguageModelChatProvider:apple-fm"
+  ],
+  "contributes": {
+    "languageModelChatProviders": [
+      {
+        "vendor": "apple-fm",
+        "displayName": "Apple Foundation Models",
+        "managementCommand": "appleFm.manage"
+      }
+    ],
+    "commands": [
+      {
+        "command": "appleFm.manage",
+        "title": "Apple FM: Open Settings"
+      },
+      {
+        "command": "appleFm.checkAvailability",
+        "title": "Apple FM: Check Model Availability"
+      },
+      {
+        "command": "appleFm.restartBridge",
+        "title": "Apple FM: Restart Bridge"
+      },
+      {
+        "command": "appleFm.showLogs",
+        "title": "Apple FM: Show Logs"
+      }
+    ],
+    "configuration": {
+      "title": "Apple Foundation Models",
+      "properties": {
+        "appleFm.bridgePath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to the `fm-bridge` binary. Leave empty to use the bundled `bin/fm-bridge` (or `swift/.build/release/fm-bridge` in a dev checkout)."
+        },
+        "appleFm.systemPrompt": {
+          "type": "string",
+          "default": "You are a concise, accurate coding assistant. Answer directly. Use Markdown and fenced code blocks.",
+          "description": "Instructions given to the model on every request. Keep it short: they count against the model's small context window (4096 tokens on-device)."
+        },
+        "appleFm.temperature": {
+          "type": "number",
+          "default": 0.7,
+          "minimum": 0,
+          "maximum": 2,
+          "description": "Sampling temperature."
+        },
+        "appleFm.maxInputTokens": {
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 32768,
+          "markdownDescription": "Cap on prompt tokens. `0` (default) uses the whole context window minus `#appleFm.maxOutputTokens#` (3096 tokens on the 4096-token on-device model). Prompts are measured with the model's own tokenizer and trimmed only when they don't fit."
+        },
+        "appleFm.maxOutputTokens": {
+          "type": "number",
+          "default": 1000,
+          "minimum": 64,
+          "maximum": 3000,
+          "markdownDescription": "Tokens always kept free for the reply. Short prompts leave the reply all remaining room in the window; long prompts are trimmed to keep at least this much."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "build:swift": "bash scripts/build-swift.sh",
+    "vscode:prepublish": "npm run compile",
+    "package": "npm run build:swift && npm run compile && vsce package --no-dependencies --target darwin-arm64 --allow-missing-repository -o apple-fm-copilot-provider.vsix",
+    "install:vscode": "npm run package && code --install-extension apple-fm-copilot-provider.vsix --force"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "1.104.0",
+    "@vscode/vsce": "^3.0.0",
+    "typescript": "^5.6.0"
+  }
+}

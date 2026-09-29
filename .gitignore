@@ -1,0 +1,6 @@
+node_modules/
+out/
+bin/
+swift/.build/
+*.vsix
+.DS_Store

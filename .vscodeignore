@@ -1,0 +1,8 @@
+.vscode/**
+src/**
+swift/**
+scripts/**
+node_modules/**
+tsconfig.json
+**/*.map
+.gitignore
