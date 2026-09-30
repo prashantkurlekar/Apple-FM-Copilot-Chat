@@ -5,6 +5,20 @@
   "version": "1.0.0",
   "publisher": "prashantkurlekar",
   "license": "MIT",
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#3A4FD8",
+    "theme": "dark"
+  },
+  "pricing": "Free",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prashantkurlekar/Apple-FM-Copilot-Chat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/prashantkurlekar/Apple-FM-Copilot-Chat/issues"
+  },
+  "homepage": "https://github.com/prashantkurlekar/Apple-FM-Copilot-Chat#readme",
   "engines": {
     "vscode": "^1.104.0"
   },
@@ -92,8 +106,9 @@
     "watch": "tsc -watch -p ./",
     "build:swift": "bash scripts/build-swift.sh",
     "vscode:prepublish": "npm run compile",
-    "package": "npm run build:swift && npm run compile && vsce package --no-dependencies --target darwin-arm64 --allow-missing-repository -o apple-fm-copilot-provider.vsix",
-    "install:vscode": "npm run package && code --install-extension apple-fm-copilot-provider.vsix --force"
+    "package": "npm run build:swift && npm run compile && vsce package --no-dependencies --target darwin-arm64 -o apple-fm-copilot-provider.vsix",
+    "install:vscode": "npm run package && code --install-extension apple-fm-copilot-provider.vsix --force",
+    "publish:marketplace": "vsce publish --packagePath apple-fm-copilot-provider.vsix"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
