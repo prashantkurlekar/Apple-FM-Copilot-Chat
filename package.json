@@ -2,7 +2,7 @@
   "name": "apple-fm-copilot-provider",
   "displayName": "Apple Foundation Models for Copilot Chat",
   "description": "Use Apple's on-device Foundation Model (Apple Intelligence) as a model in VS Code Copilot Chat. Private, offline, free.",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "publisher": "prashantkurlekar",
   "license": "MIT",
   "engines": {
